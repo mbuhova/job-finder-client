@@ -1,0 +1,94 @@
+//@import '../../theme';
+
+@media (max-width:1024px){
+    .map-container{
+        padding-left:40px !important;
+    }
+
+    .current-orders div.col-xs-12 {
+        padding-left:5px;
+        padding-right:5px;
+
+        .ngx-datatable.main-table {
+            margin-left:5px;
+            margin-right:5px;
+
+            ::ng-deep .datatable-body-cell-label {
+                font-size: 12px !important;
+            }
+
+            ::ng-deep datatable-body-cell {
+                padding-left:5px;
+                padding-right:0;
+            }
+    
+            ::ng-deep datatable-header-cell {
+                padding-left:5px;
+                padding-right:0;
+            }
+        }
+    }
+}
+
+.current-orders {
+    padding: 0;
+
+    .map {
+        width: 700px;
+        height: 700px;
+    }
+
+    .map-container{
+        height:80vh;
+        padding-right: 40px;
+
+        agm-map {
+            height: 90%;
+          }
+    }
+    
+    .data-panel.nested:first-child {
+        padding-bottom:0px;
+    }
+
+    .ngx-datatable.main-table {
+        margin-left:20px;       
+        margin-right:0;       
+        box-shadow: none;
+        
+        ::ng-deep datatable-body {
+            overflow-x: hidden;
+        }
+
+        ::ng-deep datatable-header-cell {
+            color:#000;
+            font-weight:bold;
+            font-size:13px;
+        }
+
+        ::ng-deep datatable-body-row:hover {
+            cursor: pointer;
+        }
+
+        ::ng-deep .datatable-body .datatable-row-wrapper {
+            border-bottom: 1px solid #ddd;
+        }
+    
+        ::ng-deep .datatable-body .datatable-row-wrapper:last-child {
+            border-bottom:none;
+        }
+
+        ::ng-deep .datatable-body-row.active .datatable-row-group {
+            //background-color: $background-color !important;
+            color:#000;
+        }
+
+        ::ng-deep datatable-body-cell {
+            padding-left:5px;
+        }
+
+        ::ng-deep datatable-header-cell {
+            padding-left:5px;
+        }
+    }
+}

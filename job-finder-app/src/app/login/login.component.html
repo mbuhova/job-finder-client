@@ -1,0 +1,39 @@
+<div class="wrap-container" [ngStyle]="{background: imageUrl ? 'url(' + imageUrl + ')' : '#ccc' }">
+  <div class="login-container container">
+      <div class="row">
+          <div class="col-md-12 .col-sm-12 col-xs-12 col-centered">
+              <img src="assets/logo.svg.png" alt="logo" class="logo-style">
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-11 .col-sm-11 col-xs-11 col-centered">                
+              <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+                  <div class="form-group" *ngIf="errorMessage">
+                      <span class="help-block">{{errorMessage}}</span>
+                  </div>
+                  <div *ngIf="f.submitted && !userId.valid" class="help-block">{{glConstants.LABELS.UserIdValidationMessage}}</div>                  
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userId.valid }">
+                      <!-- <svg-icon src="assets/user.svg"></svg-icon> -->
+                      <input type="text" class="form-control" name="userId" [placeholder]="glConstants.LABELS.UserID" [(ngModel)]="model.userId" #userId="ngModel"
+                          required />
+                  </div>
+                  <div *ngIf="f.submitted && !constructionId.valid" class="help-block">{{glConstants.LABELS.ConstructionIdValidationMessage}}</div>                  
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !constructionId.valid }">
+                    <!-- <svg-icon src="assets/user.svg"></svg-icon> -->
+                    <input type="text" class="form-control" name="constructionId" [placeholder]="glConstants.LABELS.ConstructionID" [(ngModel)]="model.constructionId" #constructionId="ngModel"
+                        required />
+                  </div>
+                  <div *ngIf="f.submitted && !password.valid" class="help-block">{{glConstants.LABELS.PasswordValidationMessage}}</div>                  
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                      <!-- <svg-icon class="key-icon" src="assets/key.svg"></svg-icon> -->
+                      <input type="password" class="form-control" name="password" [placeholder]="glConstants.LABELS.Password" [(ngModel)]="model.password" #password="ngModel"
+                          required />
+                  </div>
+                  <div class="form-group">
+                      <input type="submit" class="form-control" [value]="glConstants.LABELS.SignIn" />
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
