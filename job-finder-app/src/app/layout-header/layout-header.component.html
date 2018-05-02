@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" (click)="select(deliveryNotesUrl)" routerLink="/searchOffers">Job Finder</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul *ngIf="role === 'Person'" class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">My applications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Followed offers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Dashboard</a>
+        </li>
+      </ul>
+      <ul *ngIf="!role" class="navbar-nav my-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registerUser">Register user</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" (click)="test()">Register company</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+      </ul>
+      <ul *ngIf="!!role" class="navbar-nav my-2 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/registerUser">Hello user</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Log out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>

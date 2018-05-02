@@ -2,6 +2,8 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {Http, Headers,Response} from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import {ObservableInput } from 'rxjs/Observable';
+import { CredentialsStorage } from '../utils/credentials-storage';
+
 
 import { Error } from '../models/error';
 
@@ -10,10 +12,11 @@ export class HttpClient {
 
   static unauthorized: EventEmitter<any> = new EventEmitter();
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private credentialsStorage: CredentialsStorage) {}
 
   createHeaders(headers: Headers) {
     headers.append('Accept', 'application/json');
+    headers.append('Authorization', 'Bearer ' + this.credentialsStorage.getUserInfo().token);
   }
 
   private appendNoCacheHeaders(headers: Headers) {

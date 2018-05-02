@@ -1,3 +1,13 @@
 <div>
  Search offers
+
+
+ <div class="list">
+    <ul class="items-list">
+      <li *ngFor="let sector of businessSectors">
+        <input type="checkbox" ng-model="friend.selected" />
+        <span>{{sector.name}}</span>
+      </li>
+    </ul>
+  </div>
 </div>

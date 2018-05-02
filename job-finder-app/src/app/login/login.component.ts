@@ -32,10 +32,10 @@ export class LoginComponent implements OnInit {
 
   login() {
       this.errorMessage = '';
-      this.authenticationService.login(this.model.userId, this.model.constructionId, this.model.password)
+      this.authenticationService.login(this.model.email, this.model.password, this.model.rememberMe)
           .subscribe(
               (data: any) => {
-                  this.router.navigate([this.returnUrl || '/dashboard']);
+                  this.router.navigate([this.returnUrl || '/searchOffers']);
               },
               (error: any) => {
                   this.errorMessage = error.message;

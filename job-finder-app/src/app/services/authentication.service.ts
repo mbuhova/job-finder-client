@@ -14,18 +14,31 @@ export class AuthenticationService {
     private config: AppConfig,
     private credentialsStorage: CredentialsStorage) { }
   
-  login(userId: string, constructionId: string, password: string) {
-      return this.httpClient.post(this.config.apiUrl + 'login', { userId: userId, constructionId: constructionId, password: password })
+  login(email: string, password: string, rememberMe: boolean) {
+      rememberMe = rememberMe ? true : false;
+      
+      return this.httpClient.post(this.config.apiUrl + 'Account/Login', { email: email, password: password, rememberMe: rememberMe })
           .map((response: Response) => {
+              debugger;
               let userInfo = response.json();
-              if(userInfo.client && userInfo.constructionPlace) {
+              if(userInfo) {
                   this.credentialsStorage.setUserInfo(userInfo);
               }
-
           })
           .catch((error:any) => {
               return Observable.throw(error);
           });
+  }
+
+  test(){
+    return this.httpClient.get(this.config.apiUrl + 'Account/Register')
+    .map((response: Response) => {
+        let data = response.json();
+        return data;
+    })
+    .catch((error:any) => {
+        return Observable.throw(error);
+    });
   }
 
   isAuthenticated() {
