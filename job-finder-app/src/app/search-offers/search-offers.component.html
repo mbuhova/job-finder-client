@@ -1,13 +1,84 @@
-<div>
- Search offers
-
-
- <div class="list">
-    <ul class="items-list">
-      <li *ngFor="let sector of businessSectors">
-        <input type="checkbox" ng-model="friend.selected" />
-        <span>{{sector.name}}</span>
-      </li>
-    </ul>
+<div class="container search-offers">
+ <div class="row">
+   <div class="col-lg-12">
+      <h5 class="page-header">Search offers</h5>
+   </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 col-lg-4">
+      <div class="form-group">
+        <!--<label>Email address</label>-->
+        <input type="text" class="form-control" placeholder="Search by keyword" [(ngModel)]="keyword">
+      </div>
+    </div>
+    <div class="col-md-2 col-lg-2">
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input">
+        <label class="form-check-label">Permanent</label>
+      </div>
+    </div>
+    <div class="col-md-2 col-lg-2">
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input">
+        <label class="form-check-label">Temporary</label>
+      </div>
+    </div>
+    <div class="col-md-2 col-lg-2">
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input">
+        <label class="form-check-label">Full time</label>
+      </div>
+    </div>
+    <div class="col-md-2 col-lg-2">
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input">
+        <label class="form-check-label">Part time</label>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-6 col-lg-6 col-lg-offset-3">
+        <perfect-scrollbar [config]="config">
+          <ul class="list-group">
+              <li class="list-group-item" (click)="select(sector.id, businessSectors, selectedBusinessSectors)" *ngFor="let sector of businessSectors">
+                <span>{{sector.name}}</span>
+              </li>
+          </ul>
+        </perfect-scrollbar>                  
+      </div>
+    <div class="col-md-6 col-lg-6 col-lg-offset-9">
+      <perfect-scrollbar [config]="config">      
+        <ul class="list-group">
+          <li class="list-group-item" (click)="select(sector.id, selectedBusinessSectors, businessSectors)" *ngFor="let sector of selectedBusinessSectors">
+            <span>{{sector.name}}</span>
+          </li>
+        </ul>
+      </perfect-scrollbar>                        
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-lg-6 col-lg-offset-3">
+      <perfect-scrollbar [config]="config">     
+        <ul class="list-group">
+          <li class="list-group-item" (click)="select(town.id, towns, selectedTowns)" *ngFor="let town of towns">
+            <span>{{town.name}}</span>
+          </li>
+        </ul>
+      </perfect-scrollbar>        
+    </div>
+    <div class="col-md-6 col-lg-6">
+      <perfect-scrollbar [config]="config">      
+        <ul class="list-group">
+          <li class="list-group-item" (click)="select(town.id, selectedTowns, towns)" *ngFor="let town of selectedTowns">
+            <span>{{town.name}}</span>
+          </li>
+        </ul>
+      </perfect-scrollbar>                              
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2 col-lg-4">
+        <button (click)="searchOffers()" class="btn search-btn">Search</button>
+    </div>
   </div>
 </div>

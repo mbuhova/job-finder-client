@@ -16,6 +16,9 @@ export class SearchOffersComponent extends StatePage implements OnInit {
   errorMessage: string;
   towns: any[];
   businessSectors: any[];
+  selectedTowns: any[];
+  selectedBusinessSectors: any[];
+  keyword: string;
 
   constructor(
     private credentialsStorage: CredentialsStorage,
@@ -24,7 +27,10 @@ export class SearchOffersComponent extends StatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.offersService.getSearchOffers()
+  this.selectedTowns = [];
+  this.selectedBusinessSectors = [];
+
+    this.offersService.getSearchCriteria()
     .subscribe((data) => {
       this.towns = data.towns;
       this.businessSectors = data.businessSectors;
@@ -32,6 +38,21 @@ export class SearchOffersComponent extends StatePage implements OnInit {
     (error: any) => {
       this.errorMessage = error.message;
       this.ready();
+    });
+  }
+
+  select(id, collectionToRemove, collectionToAdd){
+    var found = collectionToRemove.find(function(element) {
+      return element.id === id;
+    });
+
+    var index = collectionToRemove.indexOf(found);
+    if (index !== -1) {
+      collectionToRemove.splice(index, 1);
+    }
+    collectionToAdd.push(found);
+    collectionToAdd.sort(function (a, b) {
+      return a.name > b.name;
     });
   }
 }

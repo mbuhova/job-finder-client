@@ -5,7 +5,9 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
       <layout-header></layout-header>
-      <router-outlet></router-outlet>
+      <div class='container-fluid'>
+        <router-outlet></router-outlet>  
+      </div>    
       <layout-footer></layout-footer>      
     `
 })

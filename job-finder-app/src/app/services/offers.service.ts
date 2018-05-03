@@ -16,10 +16,10 @@ export class OffersService {
     private credentialsStorage: CredentialsStorage,        
     private config: AppConfig) { }
 
-    getSearchOffers(){
-        this.updateCredentials();
+    getSearchCriteria(){
+        //this.updateCredentials();
         
-      return this.httpClient.get(this.config.apiUrl + 'SearchOffer/SearchOffers/')
+      return this.httpClient.get(this.config.apiUrl + 'api/offer/search')
           .map((response: Response) => {
               let data = response.json();
               return data;

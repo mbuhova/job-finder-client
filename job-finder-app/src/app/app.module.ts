@@ -21,7 +21,14 @@ import { CredentialsStorage } from './utils/credentials-storage';
 import { AuthenticationService } from './services/authentication.service';
 import { OffersService } from './services/offers.service';
 
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+  //scrollYMarginOffset: 2
+};
 
 @NgModule({
   declarations: [
@@ -32,9 +39,20 @@ import { OffersService } from './services/offers.service';
     LayoutFooterComponent
   ],
   imports: [
-    BrowserModule, FormsModule, AppRoutingModule, HttpModule, NgxDatatableModule, MatProgressSpinnerModule, MatIconModule
+    BrowserModule, FormsModule, AppRoutingModule, HttpModule, NgxDatatableModule, MatProgressSpinnerModule, MatIconModule, PerfectScrollbarModule
   ],
-  providers: [AppConfig, HttpClient, AuthGuard, CredentialsStorage, OffersService, AuthenticationService],
+  providers: [
+    AppConfig, 
+    HttpClient, 
+    AuthGuard, 
+    CredentialsStorage, 
+    OffersService, 
+    AuthenticationService,
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

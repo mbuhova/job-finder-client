@@ -1,0 +1,22 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import './theme';
+
+body {
+    color: $font-color;
+    
+    .container-fluid {
+        padding-top:40px;
+        min-height:862px;
+    
+        .page-header {
+            border-bottom: 2px solid #eee;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+            padding-bottom: 5px;
+            color: #666;
+        }
+    }
+}
+
+
+
