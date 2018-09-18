@@ -16,7 +16,9 @@ export class HttpClient {
 
   createHeaders(headers: Headers) {
     headers.append('Accept', 'application/json');
-    headers.append('Authorization', 'Bearer ' + this.credentialsStorage.getUserInfo().token);
+    if(this.credentialsStorage.getUserInfo()){
+      headers.append('Authorization', 'Bearer ' + this.credentialsStorage.getUserInfo().token);
+    }
   }
 
   private appendNoCacheHeaders(headers: Headers) {

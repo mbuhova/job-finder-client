@@ -22,7 +22,7 @@ export class LayoutHeaderComponent extends StatePage implements OnInit {
   }
 
   ngOnInit() {
-    this.role = this.credentialsStorage.getUserInfo().role;
+    this.role = this.credentialsStorage.getUserInfo() ? this.credentialsStorage.getUserInfo().role : '';
 
     /*this.offersService.getSearchOffers()
     .subscribe((data) => {
