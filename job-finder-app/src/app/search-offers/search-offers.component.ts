@@ -3,6 +3,7 @@ import { StatePage } from '../utils/state.component';
 import { CredentialsStorage } from '../utils/credentials-storage';
 import { DoCheck, ViewChild } from '@angular/core';
 import { OffersService } from '../services/offers.service';
+import { FindValueSubscriber } from 'rxjs/operators/find';
 
 
 declare var google: any;
@@ -19,11 +20,18 @@ export class SearchOffersComponent extends StatePage implements OnInit {
   selectedTowns: any[];
   selectedBusinessSectors: any[];
   keyword: string;
+  isPermanent: boolean;
+  isTemporary: boolean;
+  isFullTime: boolean;
+  isPartTime: boolean;
 
   constructor(
     private credentialsStorage: CredentialsStorage,
     private offersService: OffersService) {
     super();
+  }
+
+  searchOffers(){
   }
 
   ngOnInit() {
