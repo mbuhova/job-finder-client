@@ -34,16 +34,5 @@ export class LayoutHeaderComponent extends StatePage implements OnInit {
       this.ready();
     });*/
   }
-
-  test(){
-    this.authenticationService.test()
-    .subscribe(
-        (data: any) => {
-            debugger;
-        },
-        (error: any) => {
-            debugger;
-        });
-  }
 }
 

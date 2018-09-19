@@ -1,6 +1,7 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
 
 import { AppConfig } from '../app.config';
 import { HttpClient } from '../utils/http-client';
@@ -17,27 +18,17 @@ export class AuthenticationService {
   login(email: string, password: string, rememberMe: boolean) {
       rememberMe = rememberMe ? true : false;
       
-      return this.httpClient.post(this.config.apiUrl + 'Account/Login', { email: email, password: password, rememberMe: rememberMe })
-          .map((response: Response) => {
-              debugger;
-              let userInfo = response.json();
-              if(userInfo) {
-                  this.credentialsStorage.setUserInfo(userInfo);
-              }
-          })
-          .catch((error:any) => {
-              return Observable.throw(error);
-          });
+      return this.httpClient.post(this.config.apiUrl + 'Account/Login', { email: email, password: password, rememberMe: rememberMe });
   }
 
   test(){
     return this.httpClient.get(this.config.apiUrl + 'Account/Register')
-    .map((response: Response) => {
-        let data = response.json();
+    .subscribe((response: Response) => {
+        let data = response;
         return data;
-    })
-    .catch((error:any) => {
-        return Observable.throw(error);
+    },
+    (error: any) => {
+      return observableThrowError(error);
     });
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { CredentialsStorage } from '../utils/credentials-storage';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string;
 
   constructor(
+      private credentialsStorage: CredentialsStorage,
       private route: ActivatedRoute,
       private router: Router,
       private authenticationService: AuthenticationService) { }
@@ -21,13 +23,6 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
       // get return url from route parameters or default to '/'
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-      /*this.configurationService.getImageUrl('loginPicture')
-      .subscribe((imageName) => {
-        this.imageUrl = imageName;
-      },
-      (error: any) => {
-          this.errorMessage = error.message;
-      });*/
   }
 
   login() {
@@ -35,6 +30,10 @@ export class LoginComponent implements OnInit {
       this.authenticationService.login(this.model.email, this.model.password, this.model.rememberMe)
           .subscribe(
               (data: any) => {
+                let userInfo = data;
+                if(userInfo) {
+                    this.credentialsStorage.setUserInfo(userInfo);
+                }
                   this.router.navigate([this.returnUrl || '/searchOffers']);
               },
               (error: any) => {

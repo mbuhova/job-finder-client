@@ -1,25 +1,21 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
 import {Injectable, EventEmitter} from '@angular/core';
-import {Http, Headers,Response} from '@angular/http';
-import {Observable} from 'rxjs/Rx';
-import {ObservableInput } from 'rxjs/Observable';
+import {HttpClient as angularHttpClient, HttpHeaders} from '@angular/common/http';
 import { CredentialsStorage } from '../utils/credentials-storage';
-
-
 import { Error } from '../models/error';
 
 @Injectable()
 export class HttpClient {
-
   static unauthorized: EventEmitter<any> = new EventEmitter();
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': this.credentialsStorage.getUserInfo() ? 'Bearer ' + this.credentialsStorage.getUserInfo().token : ''
+    })
+  };
 
-  constructor(private http: Http, private credentialsStorage: CredentialsStorage) {}
-
-  createHeaders(headers: Headers) {
-    headers.append('Accept', 'application/json');
-    if(this.credentialsStorage.getUserInfo()){
-      headers.append('Authorization', 'Bearer ' + this.credentialsStorage.getUserInfo().token);
-    }
-  }
+  constructor(private http: angularHttpClient, private credentialsStorage: CredentialsStorage) {}
 
   private appendNoCacheHeaders(headers: Headers) {
     // IE 11 needs these headers because the GET request is cached
@@ -27,57 +23,20 @@ export class HttpClient {
     headers.append('Pragma', 'no-cache');
   }
 
+
   get(url: string) {
-    let headers = new Headers();
-    this.createHeaders(headers);
-    this.appendNoCacheHeaders(headers);
-    return this.http.get(url, {
-      headers: headers
-    })
-    .catch(this.handlerError);
+    return this.http.get(url, this.httpOptions);
   }
 
   post(url: string, data: any) {
-    let headers = new Headers();
-    this.createHeaders(headers);
-    return this.http.post(url, data, {
-      headers: headers
-    })
-    .catch(this.handlerError);
+    return this.http.post(url, data, this.httpOptions);
   }
 
   put(url: string, data: any){
-    let headers = new Headers();
-    this.createHeaders(headers);
-    return this.http.put(url, data, {
-      headers: headers
-    })
-    .catch(this.handlerError);
+    return this.http.put(url, data, this.httpOptions);
   }
 
   delete(url: string){
-    let headers = new Headers();
-    this.createHeaders(headers);
-    return this.http.delete(url, {
-      headers: headers
-    })
-    .catch(this.handlerError);
-  }
-
-  private handlerError(error: Response | any, caught: Observable<any>) : ObservableInput<any> {
-
-    if(error.status == 401){
-      HttpClient.unauthorized.emit();
-    }
-
-    let errorModel: Error;
-    try{
-      let errorData = error.json();
-      errorModel = new Error(errorData.message, errorData.detail, error.status);
-    } catch (ex) {
-      errorModel = new Error(error.statusText, null, error.status);
-    }
-
-    return Observable.throw(errorModel);
+    return this.http.delete(url, this.httpOptions);
   }
 }

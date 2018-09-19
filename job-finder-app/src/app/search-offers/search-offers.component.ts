@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StatePage } from '../utils/state.component';
 import { CredentialsStorage } from '../utils/credentials-storage';
-import { DoCheck, ViewChild } from '@angular/core';
 import { OffersService } from '../services/offers.service';
-import { FindValueSubscriber } from 'rxjs/operators/find';
 
-
-declare var google: any;
 
 @Component({
   selector: 'app-search-offers',
@@ -39,7 +35,7 @@ export class SearchOffersComponent extends StatePage implements OnInit {
   this.selectedBusinessSectors = [];
 
     this.offersService.getSearchCriteria()
-    .subscribe((data) => {
+    .subscribe((data: any) => {
       this.towns = data.towns;
       this.businessSectors = data.businessSectors;
     },

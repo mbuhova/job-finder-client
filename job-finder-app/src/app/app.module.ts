@@ -2,8 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routhing.module';
-import { HttpModule } from '@angular/http';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { HttpClientModule } from '@angular/common/http';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatIconModule } from '@angular/material';
 
@@ -39,7 +38,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LayoutFooterComponent
   ],
   imports: [
-    BrowserModule, FormsModule, AppRoutingModule, HttpModule, NgxDatatableModule, MatProgressSpinnerModule, MatIconModule, PerfectScrollbarModule
+    BrowserModule, FormsModule, AppRoutingModule, HttpClientModule, MatProgressSpinnerModule, MatIconModule, PerfectScrollbarModule
   ],
   providers: [
     AppConfig, 
