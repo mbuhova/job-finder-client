@@ -21,6 +21,10 @@ export class LayoutHeaderComponent extends StatePage implements OnInit {
     super();
   }
 
+  logout() {
+    this.credentialsStorage.removeUserInfo();
+  }
+
   ngOnInit() {
     this.role = this.credentialsStorage.getUserInfo() ? this.credentialsStorage.getUserInfo().role : '';
 

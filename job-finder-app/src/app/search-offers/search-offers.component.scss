@@ -34,5 +34,10 @@
     .search-btn {
         width:300px;
         background-color: $base-color;
+        color:#fff;
+
+        &:hover {
+            background-color: $hover-color;
+        }
     }
 }

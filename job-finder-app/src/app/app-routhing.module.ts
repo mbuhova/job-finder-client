@@ -5,10 +5,7 @@ import { CommonModule } from '@angular/common';
 import { AuthGuard } from './utils/authentication.guard';
 import { LoginComponent } from './login/login.component';
 import { SearchOffersComponent } from './search-offers/search-offers.component';
-/*import { CurrentOrdersComponent } from './current-orders/current-orders.component';
-import { OpenedOrdersComponent } from './opened-orders/opened-orders.component';
-import { DeliveredQuantitiesComponent } from './delivered-quantities/delivered-quantities.component';
-import { DeliveryNotesComponent } from './delivery-notes/delivery-notes.component'; */
+import { OffersSearchResultComponent } from './offers-search-result/offers-search-result.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'searchOffers', pathMatch: 'full' }, //canActivate: [AuthGuard] },
@@ -20,6 +17,7 @@ export const routes: Routes = [
       {path: 'deliveryNotes', component: DeliveryNotesComponent}
     ]*/
   },
+  { path: 'searchOffers/result', component: OffersSearchResultComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '/dashboard' },
 ];

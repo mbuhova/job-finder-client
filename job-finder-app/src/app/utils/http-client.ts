@@ -8,12 +8,17 @@ import { Error } from '../models/error';
 @Injectable()
 export class HttpClient {
   static unauthorized: EventEmitter<any> = new EventEmitter();
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': this.credentialsStorage.getUserInfo() ? 'Bearer ' + this.credentialsStorage.getUserInfo().token : ''
-    })
-  };
+  // httpOptions = {
+  //   headers: new HttpHeaders({
+  //     'Content-Type':  'application/json',
+  //     'Authorization': this.credentialsStorage.getUserInfo() ? 'Bearer ' + this.credentialsStorage.getUserInfo().token : ''
+  //   })
+  // };
+
+  headers = new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': this.credentialsStorage.getUserInfo() ? 'Bearer ' + this.credentialsStorage.getUserInfo().token : ''
+  });
 
   constructor(private http: angularHttpClient, private credentialsStorage: CredentialsStorage) {}
 
@@ -24,19 +29,19 @@ export class HttpClient {
   }
 
 
-  get(url: string) {
-    return this.http.get(url, this.httpOptions);
+  get(url: string, queryParams) {
+    return this.http.get(url, { headers:this.headers, params: queryParams });
   }
 
   post(url: string, data: any) {
-    return this.http.post(url, data, this.httpOptions);
+    return this.http.post(url, data, { headers:this.headers });
   }
 
   put(url: string, data: any){
-    return this.http.put(url, data, this.httpOptions);
+    return this.http.put(url, data, { headers:this.headers });
   }
 
   delete(url: string){
-    return this.http.delete(url, this.httpOptions);
+    return this.http.delete(url, { headers:this.headers });
   }
 }

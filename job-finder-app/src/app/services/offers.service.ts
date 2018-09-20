@@ -4,11 +4,11 @@ import { CredentialsStorage } from '../utils/credentials-storage';
 import { Observable } from "rxjs";
 import { AppConfig } from '../app.config';
 import { HttpClient } from '../utils/http-client';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class OffersService {
-    clientId: number;
-    constructionPlaceId: number;
+    offersSearchResult: any;
 
   constructor(
     private httpClient: HttpClient,
@@ -18,15 +18,30 @@ export class OffersService {
     getSearchCriteria(){
         //this.updateCredentials();
         
-      return this.httpClient.get(this.config.apiUrl + 'api/offer/search');
+      return this.httpClient.get(this.config.apiUrl + 'api/offer/search', {});
     }
 
-    searchOffers(){
+    saveData(data){
+        this.offersSearchResult = data;
     }
 
-    updateCredentials(){
-        let userInfo = this.credentialsStorage.getUserInfo();
-        this.clientId = userInfo.client.clientId;
-        this.constructionPlaceId = userInfo.constructionPlace.constructionPlaceId;
+    getData(){
+        return this.offersSearchResult;
     }
+
+    searchOffers(searchCriteria){
+        let params = new HttpParams()
+        .set('keyword', searchCriteria.keyword)
+        .set('isPermanent', searchCriteria.isPermanent)
+        .set('isTemporary', searchCriteria.isTemporary)
+        .set('isFullTime', searchCriteria.isFullTime)
+        .set('isPartTime', searchCriteria.isPartTime)
+        .set('selectedTowns', searchCriteria.selectedTowns)
+        .set('selectedBusinessSectors', searchCriteria.selectedBusinessSectors);
+      return this.httpClient.get(this.config.apiUrl + 'api/offer/searchOffers', params);
+    }
+
+    // updateCredentials(){
+    //     let userInfo = this.credentialsStorage.getUserInfo();
+    // }
 }

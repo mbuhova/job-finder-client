@@ -22,7 +22,7 @@ export class AuthenticationService {
   }
 
   test(){
-    return this.httpClient.get(this.config.apiUrl + 'Account/Register')
+    return this.httpClient.get(this.config.apiUrl + 'Account/Register', {})
     .subscribe((response: Response) => {
         let data = response;
         return data;

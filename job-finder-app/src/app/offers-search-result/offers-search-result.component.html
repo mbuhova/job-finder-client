@@ -1,0 +1,23 @@
+<div *ngIf="!!dataSource" class="list-container">
+
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <div class="items-table-container">
+    <table mat-table [dataSource]="dataSource" matSort matSortDisableClear matSortActive="title" matSortDirection="asc" class="items-table mat-elevation-z8">
+     
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Title</th>
+        <td mat-cell *matCellDef="let element">{{element.title}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="town">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Town</th>
+        <td mat-cell *matCellDef="let element">{{element.town}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelectItem(row)" [ngClass]="{'selected': selectedItem == row }"></tr>
+    </table>
+  </div>
+</div>

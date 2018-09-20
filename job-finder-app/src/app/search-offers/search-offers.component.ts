@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatePage } from '../utils/state.component';
 import { CredentialsStorage } from '../utils/credentials-storage';
 import { OffersService } from '../services/offers.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,19 +16,44 @@ export class SearchOffersComponent extends StatePage implements OnInit {
   businessSectors: any[];
   selectedTowns: any[];
   selectedBusinessSectors: any[];
-  keyword: string;
-  isPermanent: boolean;
-  isTemporary: boolean;
-  isFullTime: boolean;
-  isPartTime: boolean;
+  keyword = '';
+  isPermanent = false;
+  isTemporary = false;
+  isFullTime = false;
+  isPartTime = false;
 
   constructor(
+    private router: Router,
     private credentialsStorage: CredentialsStorage,
     private offersService: OffersService) {
     super();
   }
 
   searchOffers(){
+    let searchCriteria = {
+      selectedTowns: this.selectedTowns.map(x => { return x.id; }),
+      selectedBusinessSectors: this.selectedBusinessSectors.map(x => { return x.id; }),
+      isPermanent: this.isPermanent,
+      isTemporary: this.isTemporary,
+      isFullTime: this.isFullTime,
+      isPartTime: this.isPartTime,
+      keyword: this.keyword
+    }
+
+    this.offersService.searchOffers(searchCriteria)
+    .subscribe((data: any) => {
+      if(data){
+        this.offersService.saveData(data);
+        this.router.navigate(['/searchOffers/result']);
+      }
+      else {
+        //TODO - show message no data found.
+      }
+    },
+    (error: any) => {
+      this.errorMessage = error.message;
+      this.ready();
+    });
   }
 
   ngOnInit() {
