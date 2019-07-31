@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { AuthGuard } from './utils/authentication.guard';
 import { LoginComponent } from './login/login.component';
+import { RegisterPersonComponent } from './register-person/register-person.component';
 import { SearchOffersComponent } from './search-offers/search-offers.component';
 import { OffersSearchResultComponent } from './offers-search-result/offers-search-result.component';
 
@@ -19,6 +20,8 @@ export const routes: Routes = [
   },
   { path: 'searchOffers/result', component: OffersSearchResultComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'register/person', component: RegisterPersonComponent },
+  { path: 'register/company', component: RegisterPersonComponent },
   { path: '**', redirectTo: '/dashboard' },
 ];
 

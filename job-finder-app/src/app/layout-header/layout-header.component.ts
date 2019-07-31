@@ -23,20 +23,15 @@ export class LayoutHeaderComponent extends StatePage implements OnInit {
 
   logout() {
     this.credentialsStorage.removeUserInfo();
+    this.role = '';
   }
 
   ngOnInit() {
     this.role = this.credentialsStorage.getUserInfo() ? this.credentialsStorage.getUserInfo().role : '';
 
-    /*this.offersService.getSearchOffers()
-    .subscribe((data) => {
-      this.towns = data.towns;
-      this.businessSectors = data.businessSectors;
-    },
-    (error: any) => {
-      this.errorMessage = error.message;
-      this.ready();
-    });*/
+    this.authenticationService.loggedInUser.subscribe(userInfo => {
+      this.role = !!userInfo ? userInfo.role : '';
+    });
   }
 }
 

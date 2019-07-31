@@ -4,40 +4,29 @@ import { AuthenticationService } from '../services/authentication.service';
 import { CredentialsStorage } from '../utils/credentials-storage';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  model: any = {};
-  returnUrl: string;
-  imageUrl: string;
-  errorMessage: string;
+    model: any = {};
+    returnUrl: string;
+    imageUrl: string;
+    errorMessage: string;
 
-  constructor(
-      private credentialsStorage: CredentialsStorage,
-      private route: ActivatedRoute,
-      private router: Router,
-      private authenticationService: AuthenticationService) { }
+    constructor(
+        private credentialsStorage: CredentialsStorage,
+        private route: ActivatedRoute,
+        private router: Router,
+        private authenticationService: AuthenticationService) { }
 
-  ngOnInit() {
-      // get return url from route parameters or default to '/'
-      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-  }
+    ngOnInit() {
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
 
-  login() {
-      this.errorMessage = '';
-      this.authenticationService.login(this.model.email, this.model.password, this.model.rememberMe)
-          .subscribe(
-              (data: any) => {
-                let userInfo = data;
-                if(userInfo) {
-                    this.credentialsStorage.setUserInfo(userInfo);
-                }
-                  this.router.navigate([this.returnUrl || '/searchOffers']);
-              },
-              (error: any) => {
-                  this.errorMessage = error.message;
-              });
-  }
+    login() {
+        this.errorMessage = '';
+        this.authenticationService.login(this.model.email, this.model.password, this.model.rememberMe);
+    }
 }

@@ -46,6 +46,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterPersonComponent } from './register-person/register-person.component';
 import { SearchOffersComponent } from './search-offers/search-offers.component';
 import { LayoutHeaderComponent } from './layout-header/layout-header.component';
 import { LayoutFooterComponent } from './layout-footer/layout-footer.component';
@@ -71,6 +72,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterPersonComponent,
     SearchOffersComponent,
     LayoutHeaderComponent,
     LayoutFooterComponent,

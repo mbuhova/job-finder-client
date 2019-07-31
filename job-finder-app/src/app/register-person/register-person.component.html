@@ -1,0 +1,53 @@
+<div class="wrap-container" [ngStyle]="{background: imageUrl ? 'url(' + imageUrl + ')' : '#ccc' }">
+    <div class="register-container container">
+        <div class="row">
+            <div class="col-md-12 .col-sm-12 col-xs-12 col-centered">
+                <!--<img src="assets/logo.svg.png" alt="logo" class="logo-style">-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-11 .col-sm-11 col-xs-11 col-centered" [ngSwitch]="userTypeUrl">
+                <form name="form" (ngSubmit)="registerUser()" #f="ngForm" novalidate *ngSwitchCase="UserType.Person">
+                    <div class="form-group">
+                        <label for="emailAddress">Email address</label>
+                        <input name="email" type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp"
+                            placeholder="Enter email" [(ngModel)]="model.email" #email="ngModel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password"
+                            [(ngModel)]="model.password" #password="ngModel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm password</label>
+                        <input name="confirmPassword" type="password" class="form-control" id="confirmPassword"
+                            placeholder="Password" [(ngModel)]="model.confirmPassword" #password="ngModel" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register user</button>
+                </form>
+                <div *ngSwitchCase="UserType.Company">
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-lg-offset-3">
+                          <perfect-scrollbar [config]="config">
+                            <ul class="list-group">
+                              <li class="list-group-item" (click)="select(sector.id, businessSectors, selectedBusinessSectors)" *ngFor="let sector of businessSectors">
+                                <span>{{sector.name}}</span>
+                              </li>
+                            </ul>
+                          </perfect-scrollbar>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-lg-offset-9">
+                          <perfect-scrollbar [config]="config">
+                            <ul class="list-group">
+                              <li class="list-group-item" (click)="select(sector.id, selectedBusinessSectors, businessSectors)" *ngFor="let sector of selectedBusinessSectors">
+                                <span>{{sector.name}}</span>
+                              </li>
+                            </ul>
+                          </perfect-scrollbar>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

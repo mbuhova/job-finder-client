@@ -1,8 +1,8 @@
 <div class="container search-offers">
- <div class="row">
-   <div class="col-lg-12">
+  <div class="row">
+    <div class="col-lg-12">
       <h5 class="page-header">Search offers</h5>
-   </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-md-2 col-lg-4">
@@ -37,48 +37,48 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-md-6 col-lg-6 col-lg-offset-3">
-        <perfect-scrollbar [config]="config">
-          <ul class="list-group">
-              <li class="list-group-item" (click)="select(sector.id, businessSectors, selectedBusinessSectors)" *ngFor="let sector of businessSectors">
-                <span>{{sector.name}}</span>
-              </li>
-          </ul>
-        </perfect-scrollbar>                  
-      </div>
+    <div class="col-md-6 col-lg-6 col-lg-offset-3">
+      <perfect-scrollbar [config]="config">
+        <ul class="list-group">
+          <li class="list-group-item" (click)="select(sector.id, businessSectors, selectedBusinessSectors)" *ngFor="let sector of businessSectors">
+            <span>{{sector.name}}</span>
+          </li>
+        </ul>
+      </perfect-scrollbar>
+    </div>
     <div class="col-md-6 col-lg-6 col-lg-offset-9">
-      <perfect-scrollbar [config]="config">      
+      <perfect-scrollbar [config]="config">
         <ul class="list-group">
           <li class="list-group-item" (click)="select(sector.id, selectedBusinessSectors, businessSectors)" *ngFor="let sector of selectedBusinessSectors">
             <span>{{sector.name}}</span>
           </li>
         </ul>
-      </perfect-scrollbar>                        
+      </perfect-scrollbar>
     </div>
   </div>
   <div class="row">
     <div class="col-md-6 col-lg-6 col-lg-offset-3">
-      <perfect-scrollbar [config]="config">     
+      <perfect-scrollbar [config]="config">
         <ul class="list-group">
           <li class="list-group-item" (click)="select(town.id, towns, selectedTowns)" *ngFor="let town of towns">
             <span>{{town.name}}</span>
           </li>
         </ul>
-      </perfect-scrollbar>        
+      </perfect-scrollbar>
     </div>
     <div class="col-md-6 col-lg-6">
-      <perfect-scrollbar [config]="config">      
+      <perfect-scrollbar [config]="config">
         <ul class="list-group">
           <li class="list-group-item" (click)="select(town.id, selectedTowns, towns)" *ngFor="let town of selectedTowns">
             <span>{{town.name}}</span>
           </li>
         </ul>
-      </perfect-scrollbar>                              
+      </perfect-scrollbar>
     </div>
   </div>
   <div class="row">
     <div class="col-md-2 col-lg-4">
-        <button (click)="searchOffers()" class="btn search-btn">Search</button>
+      <button (click)="searchOffers()" class="btn search-btn">Search</button>
     </div>
   </div>
 </div>
