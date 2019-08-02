@@ -20,7 +20,7 @@ export class RegisterPersonComponent implements OnInit {
     userTypeUrl: string;
     public UserType = UserType;
     businessSectors: any[];
-    selectedBusinessSectors: any[];
+    towns: any[];
     imageUrl: string;
     errorMessage: string;
 
@@ -32,19 +32,24 @@ export class RegisterPersonComponent implements OnInit {
         private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
-        // get return url from route parameters or default to '/'
-        //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-
-        this.selectedBusinessSectors = [];
         this.offersService.getSearchCriteria()
             .subscribe((data: any) => {
+                this.towns = data.towns;
                 this.businessSectors = data.businessSectors;
             });
 
         this.userTypeUrl = this.route.snapshot.url[this.route.snapshot.url.length - 1].path;
     }
 
-    registerUser() {
+    public isNumber(evt) {
+        var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+        if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+            return false;
+
+        return true;
+    }   
+
+    public registerUser() {
         this.authenticationService.registerUser(this.model.email, this.model.password, this.model.confirmPassword)
             .subscribe(
                 (data: any) => {
@@ -59,18 +64,18 @@ export class RegisterPersonComponent implements OnInit {
                 });
     }
 
-    public select(id, collectionToRemove, collectionToAdd) {
-        var found = collectionToRemove.find(function (element) {
-            return element.id === id;
-        });
-
-        var index = collectionToRemove.indexOf(found);
-        if (index !== -1) {
-            collectionToRemove.splice(index, 1);
-        }
-        collectionToAdd.push(found);
-        collectionToAdd.sort(function (a, b) {
-            return a.name > b.name;
-        });
+    public registerCompany() {
+        this.authenticationService.registerCompany(this.model)
+        .subscribe(
+            (data: any) => {
+                 let userInfo = data;
+                // if (userInfo) {
+                //     this.credentialsStorage.setUserInfo(userInfo);
+                // }
+                // this.router.navigate(['/searchOffers']);
+            },
+            (error: any) => {
+                this.errorMessage = error.message;
+            });
     }
 }

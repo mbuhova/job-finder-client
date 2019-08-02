@@ -25,28 +25,47 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Register user</button>
                 </form>
-                <div *ngSwitchCase="UserType.Company">
-                    <div class="row">
-                        <div class="col-md-6 col-lg-6 col-lg-offset-3">
-                          <perfect-scrollbar [config]="config">
-                            <ul class="list-group">
-                              <li class="list-group-item" (click)="select(sector.id, businessSectors, selectedBusinessSectors)" *ngFor="let sector of businessSectors">
-                                <span>{{sector.name}}</span>
-                              </li>
-                            </ul>
-                          </perfect-scrollbar>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-lg-offset-9">
-                          <perfect-scrollbar [config]="config">
-                            <ul class="list-group">
-                              <li class="list-group-item" (click)="select(sector.id, selectedBusinessSectors, businessSectors)" *ngFor="let sector of selectedBusinessSectors">
-                                <span>{{sector.name}}</span>
-                              </li>
-                            </ul>
-                          </perfect-scrollbar>
-                        </div>
-                      </div>
-                </div>
+                <form name="form" (ngSubmit)="registerCompany()" #f="ngForm" novalidate *ngSwitchCase="UserType.Company">
+                    <div class="form-group">
+                        <label for="emailAddress">Email address</label>
+                        <input name="email" type="email" class="form-control" id="emailAddress" aria-describedby="emailHelp"
+                            placeholder="Enter email" [(ngModel)]="model.email" #email="ngModel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password"
+                            [(ngModel)]="model.password" #password="ngModel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm password</label>
+                        <input name="confirmPassword" type="password" class="form-control" id="confirmPassword"
+                            placeholder="Password" [(ngModel)]="model.confirmPassword" #password="ngModel" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bulstat">Bulstat</label>
+                        <input name="bulstat" type="text" class="form-control" id="bulstat"
+                            [(ngModel)]="model.bulstat" required (keypress)="isNumber($event)" maxlength="13">
+                    </div>
+                    <div class="form-group">
+                        <label for="town">Select town</label>
+                        <select class="form-control" id="town" name="townId" [(ngModel)]="model.townId">
+                            <option selected disabled hidden>Select town</option>
+                            <option *ngFor="let town of towns;" [value]="town.id">
+                                {{town.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="town">Select business sector</label>
+                        <select class="form-control" id="businessSector" name="businessSector" [(ngModel)]="model.businessSector">
+                            <option selected disabled hidden>Select business sector</option>
+                            <option *ngFor="let sector of businessSectors;" [value]="sector.id">
+                                {{sector.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register company</button>
+                </form>
             </div>
         </div>
     </div>

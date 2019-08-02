@@ -43,6 +43,18 @@ export class AuthenticationService {
     });
   }
 
+  registerCompany(model) {
+    return this.httpClient.post(this.config.apiUrl + 'Account/RegisterCompany', 
+    { 
+      email: model.email, 
+      password: model.password, 
+      confirmPassword: model.confirmPassword, 
+      bulstat: model.bulstat, 
+      townId: parseInt(model.townId)
+    }
+    );
+  }
+
   isAuthenticated() {
     return !!this.credentialsStorage.getUserInfo();
   }
