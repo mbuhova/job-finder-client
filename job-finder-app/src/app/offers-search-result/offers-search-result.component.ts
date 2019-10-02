@@ -10,7 +10,7 @@ import { MatTableDataSource, MatSort } from '@angular/material';
 export class OffersSearchResultComponent implements OnInit {
   offers: any[];
   selectedItem: any;
-  displayedColumns: string[] = ['title', 'town'];
+  displayedColumns: string[] = ['title', 'town', 'businessSector', 'companyName', 'dateCreated', 'isFullTime', 'isPermanent'];
   public dataSource: MatTableDataSource<any>
   private sort: MatSort;
 

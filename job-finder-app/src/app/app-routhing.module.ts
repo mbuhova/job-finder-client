@@ -6,6 +6,8 @@ import { AuthGuard } from './utils/authentication.guard';
 import { LoginComponent } from './login/login.component';
 import { RegisterPersonComponent } from './register-person/register-person.component';
 import { SearchOffersComponent } from './search-offers/search-offers.component';
+import { CreateOfferComponent } from './create-offer/create-offer.component';
+import { MyOffersComponent } from './my-offers/my-offers.component';
 import { OffersSearchResultComponent } from './offers-search-result/offers-search-result.component';
 
 export const routes: Routes = [
@@ -19,6 +21,8 @@ export const routes: Routes = [
     ]*/
   },
   { path: 'searchOffers/result', component: OffersSearchResultComponent },
+  { path: 'createOffer', component: CreateOfferComponent },
+  { path: 'myOffers', component: MyOffersComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register/person', component: RegisterPersonComponent },
   { path: 'register/company', component: RegisterPersonComponent },

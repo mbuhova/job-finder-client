@@ -29,6 +29,10 @@ export class OffersService {
         return this.offersSearchResult;
     }
 
+    getMyOffers(){
+        return this.httpClient.get(this.config.apiUrl + 'api/offer/myOffers', {});
+    }
+
     searchOffers(searchCriteria){
         let params = new HttpParams()
         .set('keyword', searchCriteria.keyword)
@@ -39,6 +43,10 @@ export class OffersService {
         .set('selectedTowns', searchCriteria.selectedTowns)
         .set('selectedBusinessSectors', searchCriteria.selectedBusinessSectors);
       return this.httpClient.get(this.config.apiUrl + 'api/offer/searchOffers', params);
+    }
+
+    createOffer(data) {
+        return this.httpClient.post(this.config.apiUrl + 'api/offer/createOffer', data);
     }
 
     // updateCredentials(){

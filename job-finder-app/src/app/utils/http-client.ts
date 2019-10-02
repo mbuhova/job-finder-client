@@ -15,10 +15,12 @@ export class HttpClient {
   //   })
   // };
 
-  headers = new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Authorization': this.credentialsStorage.getUserInfo() ? 'Bearer ' + this.credentialsStorage.getUserInfo().token : ''
-  });
+  private getHeaders() {
+    return new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': this.credentialsStorage.getUserInfo() ? 'Bearer ' + this.credentialsStorage.getUserInfo().token : ''
+    })
+  }
 
   constructor(private http: angularHttpClient, private credentialsStorage: CredentialsStorage) {}
 
@@ -30,18 +32,18 @@ export class HttpClient {
 
 
   get(url: string, queryParams) {
-    return this.http.get(url, { headers:this.headers, params: queryParams });
+    return this.http.get(url, { headers:this.getHeaders(), params: queryParams });
   }
 
   post(url: string, data: any) {
-    return this.http.post(url, data, { headers:this.headers });
+    return this.http.post(url, data, { headers:this.getHeaders() });
   }
 
   put(url: string, data: any){
-    return this.http.put(url, data, { headers:this.headers });
+    return this.http.put(url, data, { headers:this.getHeaders() });
   }
 
   delete(url: string){
-    return this.http.delete(url, { headers:this.headers });
+    return this.http.delete(url, { headers:this.getHeaders() });
   }
 }

@@ -62,6 +62,8 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { OffersSearchResultComponent } from './offers-search-result/offers-search-result.component';
+import { CreateOfferComponent } from './create-offer/create-offer.component';
+import { MyOffersComponent } from './my-offers/my-offers.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -76,7 +78,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SearchOffersComponent,
     LayoutHeaderComponent,
     LayoutFooterComponent,
-    OffersSearchResultComponent
+    OffersSearchResultComponent,
+    CreateOfferComponent,
+    MyOffersComponent
   ],
   imports: [
     MatAutocompleteModule,

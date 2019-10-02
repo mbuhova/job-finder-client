@@ -18,16 +18,13 @@
       </ul>
       <ul *ngIf="role === 'Company'" class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">My offers</a>
+          <a class="nav-link" href="#" routerLink="/myOffers">My offers</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Create offer</a>
+          <a class="nav-link" href="#" routerLink="/createOffer">Create offer</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Business card</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Dashboard</a>
         </li>
       </ul>
       <ul *ngIf="!role" class="navbar-nav my-2 my-lg-0">

@@ -1,0 +1,135 @@
+<div class="wrap-container" [ngStyle]="{background: imageUrl ? 'url(' + imageUrl + ')' : '#eee' }">
+  <div class="container">
+    <div class="row" *ngIf="!!this.successMessage">
+        <div class="col-md-12 .col-sm-12 col-xs-12 col-centered">
+            <div class="alert alert-success alert-dismissible">
+                <a (click)="resetMessage()" routerLink="/createOffer" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>{{this.successMessage}}</strong>
+            </div>
+        </div>
+    </div>
+      <div class="row" *ngIf="!this.successMessage">
+          <div class="col-md-11 .col-sm-11 col-xs-11 col-centered">   
+                <form name="form" (ngSubmit)="createOffer()" #f="ngForm" novalidate>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input 
+                          name="title" 
+                          type="text" 
+                          class="form-control" 
+                          id="title" 
+                          placeholder="Title" 
+                          [(ngModel)]="model.title" 
+                          #title="ngModel"
+                          required 
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input 
+                          name="description" 
+                          type="text" 
+                          class="form-control" 
+                          id="description" 
+                          placeholder="Description" 
+                          [(ngModel)]="model.description" 
+                          #description="ngModel"
+                          required 
+                        />
+                    </div>
+                    <div class="form-group">
+                      <label for="town">Select town</label>
+                      <select class="form-control" id="town" name="townId" [(ngModel)]="model.townId">
+                          <option selected disabled hidden>Select town</option>
+                          <option *ngFor="let town of towns;" [value]="town.id">
+                              {{town.name}}
+                          </option>
+                      </select>
+                  </div>
+                  <div class="form-group">
+                      <label for="businessSectorId">Select business sector</label>
+                      <select class="form-control" id="businessSectorId" name="businessSectorId" [(ngModel)]="model.businessSectorId">
+                          <option selected disabled hidden>Select business sector</option>
+                          <option *ngFor="let sector of businessSectors;" [value]="sector.id">
+                              {{sector.name}}
+                          </option>
+                      </select>
+                  </div>
+                    <div class="form-group form-check">
+                        <input 
+                          name="isPermanent" 
+                          type="checkbox" 
+                          class="form-check-input" 
+                          id="isPermanent" 
+                          [(ngModel)]="model.isPermanent" 
+                          #isPermanent="ngModel"
+                        />
+                        <label class="form-check-label" for="isPermanent">Is Permanent</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input 
+                          name="isTemporary" 
+                          type="checkbox" 
+                          class="form-check-input" 
+                          id="isTemporary" 
+                          [(ngModel)]="model.isTemporary" 
+                          #isTemporary="ngModel"
+                        />
+                        <label class="form-check-label" for="isTemporary">Is Temporary</label>
+                    </div>
+                    <div class="form-group form-check">
+                      <input 
+                        name="isFullTime" 
+                        type="checkbox" 
+                        class="form-check-input" 
+                        id="isFullTime" 
+                        [(ngModel)]="model.isFullTime" 
+                        #isFullTime="ngModel"
+                      />
+                      <label class="form-check-label" for="isFullTime">Is Full Time</label>
+                    </div>
+                    <div class="form-group form-check">
+                        <input 
+                          name="isPartTime" 
+                          type="checkbox" 
+                          class="form-check-input" 
+                          id="isPartTime" 
+                          [(ngModel)]="model.isPartTime" 
+                          #isFullTime="ngModel"
+                        />
+                        <label class="form-check-label" for="isPartTime">Is Part Time</label>
+                      </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>  
+            
+
+              <!--<form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+                  <div class="form-group" *ngIf="errorMessage">
+                      <span class="help-block">{{errorMessage}}</span>
+                  </div>
+                  <div *ngIf="f.submitted && !userId.valid" class="help-block">{{glConstants.LABELS.UserIdValidationMessage}}</div>                  
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !userId.valid }">
+                      
+                      <input type="text" class="form-control" name="userId" [placeholder]="glConstants.LABELS.UserID" [(ngModel)]="model.userId" #userId="ngModel"
+                          required />
+                  </div>
+                  <div *ngIf="f.submitted && !constructionId.valid" class="help-block">{{glConstants.LABELS.ConstructionIdValidationMessage}}</div>                  
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !constructionId.valid }">
+                    
+                    <input type="text" class="form-control" name="constructionId" [placeholder]="glConstants.LABELS.ConstructionID" [(ngModel)]="model.constructionId" #constructionId="ngModel"
+                        required />
+                  </div>
+                  <div *ngIf="f.submitted && !password.valid" class="help-block">{{glConstants.LABELS.PasswordValidationMessage}}</div>                  
+                  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+                      
+                      <input type="password" class="form-control" name="password" [placeholder]="glConstants.LABELS.Password" [(ngModel)]="model.password" #password="ngModel"
+                          required />
+                  </div>
+                  <div class="form-group">
+                      <input type="submit" class="form-control" [value]="glConstants.LABELS.SignIn" />
+                  </div>
+              </form>-->
+          </div>
+      </div>
+  </div>
+</div>
