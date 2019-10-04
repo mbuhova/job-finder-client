@@ -8,7 +8,9 @@ import { RegisterPersonComponent } from './register-person/register-person.compo
 import { SearchOffersComponent } from './search-offers/search-offers.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 import { MyOffersComponent } from './my-offers/my-offers.component';
+import { MyOfferDetailsComponent } from './my-offer-details/my-offer-details.component';
 import { OffersSearchResultComponent } from './offers-search-result/offers-search-result.component';
+import { OffersSearchDetailsComponent } from './offers-search-details/offers-search-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'searchOffers', pathMatch: 'full' }, //canActivate: [AuthGuard] },
@@ -21,8 +23,10 @@ export const routes: Routes = [
     ]*/
   },
   { path: 'searchOffers/result', component: OffersSearchResultComponent },
+  { path: 'searchOffers/:id', component: OffersSearchDetailsComponent },
   { path: 'createOffer', component: CreateOfferComponent },
   { path: 'myOffers', component: MyOffersComponent },
+  { path: 'myOffers/:id', component: MyOfferDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register/person', component: RegisterPersonComponent },
   { path: 'register/company', component: RegisterPersonComponent },

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { OffersService } from '../services/offers.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-offers',
@@ -14,7 +15,7 @@ export class MyOffersComponent implements OnInit {
   public dataSource: MatTableDataSource<any>
   private sort: MatSort;
 
-  constructor(private offersService: OffersService) { }
+  constructor(private offersService: OffersService, private router: Router) { }
 
   @ViewChild(MatSort) set matSort(ms: MatSort) {
     this.sort = ms;
@@ -27,6 +28,7 @@ export class MyOffersComponent implements OnInit {
 
   onSelectItem(row) {
     this.selectedItem = row;
+    this.router.navigate([`/myOffers/${row.id}`]);
   }
 
   ngOnInit() {

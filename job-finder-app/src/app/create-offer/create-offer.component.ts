@@ -25,6 +25,7 @@ export class CreateOfferComponent implements OnInit {
 
   resetMessage() {
     this.successMessage = undefined;
+    this.model = {}
   }
 
   createOffer() {

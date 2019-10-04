@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { OffersService } from '../services/offers.service';
 import { MatTableDataSource, MatSort } from '@angular/material';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-offers-search-result',
@@ -19,7 +21,7 @@ export class OffersSearchResultComponent implements OnInit {
     if (this.dataSource) this.dataSource.sort = this.sort;
   }
 
-  constructor(private offersService: OffersService) { }
+  constructor(private offersService: OffersService, private router: Router) { }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -27,6 +29,7 @@ export class OffersSearchResultComponent implements OnInit {
 
   onSelectItem(row) {
     this.selectedItem = row;
+    this.router.navigate([`/searchOffers/${row.id}`]);
   }
 
   ngOnInit() {
